@@ -26,7 +26,10 @@
     "symfony/console": "^3.3"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "@stable"
+    "friendsofphp/php-cs-fixer": "@stable",
+    "symfony/config": "^3.0",
+    "symfony/dependency-injection": "^3.0",
+    "symfony/http-kernel": "^3.0"
   },
   "bin": ["bin/bitrix-console"]
 }
