@@ -48,7 +48,7 @@ class CacheClear extends BitrixCommand
     protected function fileCacheClean($cacheType, $cacheEngine, $cachePath)
     {
         if ($cacheType === 'html' || $cacheEngine === 'cacheenginefiles') {
-            require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/classes/general/cache_files_cleaner.php';
+            require_once $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/classes/general/cache_files_cleaner.php';
             $obCacheCleaner = new \CFileCacheCleaner($cacheType);
             if (!$obCacheCleaner->InitPath($cachePath)) {
                 throw new \RuntimeException('Cant init File Cache Cleaner');
@@ -69,7 +69,7 @@ class CacheClear extends BitrixCommand
             $space_freed = 0;
             while ($file = $obCacheCleaner->GetNextFile()) {
                 if (\is_string($file)
-                    && !preg_match("/(\\.enabled|.config\\.php)\$/", $file)
+                    && !preg_match('/(\\.enabled|.config\\.php)$/', $file)
                 ) {
                     $file_size = filesize($file);
                     $_SESSION['CACHE_STAT']['scanned']++;
@@ -130,17 +130,17 @@ class CacheClear extends BitrixCommand
     protected function logResult()
     {
         if ($_SESSION['CACHE_STAT']) {
-            $this->log(LogLevel::INFO, 'Processed: ' . (int)$_SESSION['CACHE_STAT']['scanned']);
+            $this->log(LogLevel::INFO, 'Processed: '.(int) $_SESSION['CACHE_STAT']['scanned']);
             $this->log(
                 LogLevel::INFO,
-                'Size of files processed: ' . CFile::FormatSize($_SESSION['CACHE_STAT']['space_total'])
+                'Size of files processed: '.CFile::FormatSize($_SESSION['CACHE_STAT']['space_total'])
             );
-            $this->log(LogLevel::INFO, 'Deleted: ' . (int)$_SESSION['CACHE_STAT']['deleted']);
+            $this->log(LogLevel::INFO, 'Deleted: '.(int) $_SESSION['CACHE_STAT']['deleted']);
             $this->log(
                 LogLevel::INFO,
-                'Size of files deleted: ' . CFile::FormatSize($_SESSION['CACHE_STAT']['space_freed'])
+                'Size of files deleted: '.CFile::FormatSize($_SESSION['CACHE_STAT']['space_freed'])
             );
-            $this->log(LogLevel::INFO, 'Deletion errors: ' . (int)$_SESSION['CACHE_STAT']['errors']);
+            $this->log(LogLevel::INFO, 'Deletion errors: '.(int) $_SESSION['CACHE_STAT']['errors']);
         } else {
             $this->log(LogLevel::INFO, 'The cache files has been deleted');
         }
@@ -153,10 +153,10 @@ class CacheClear extends BitrixCommand
         $cacheEngine = Cache::getCacheEngineType();
 
         $this->log(LogLevel::INFO, 'Clear cache start');
-        $this->log(LogLevel::INFO, 'Cache Engine: ' . $cacheEngine);
-        $this->log(LogLevel::INFO, 'Cache Type: ' . $cacheType);
+        $this->log(LogLevel::INFO, 'Cache Engine: '.$cacheEngine);
+        $this->log(LogLevel::INFO, 'Cache Type: '.$cacheType);
         if ($cachePath) {
-            $this->log(LogLevel::INFO, 'Cache Path: ' . $cachePath);
+            $this->log(LogLevel::INFO, 'Cache Path: '.$cachePath);
         }
 
         $this->fileCacheClean($cacheType, $cacheEngine, $cachePath);
