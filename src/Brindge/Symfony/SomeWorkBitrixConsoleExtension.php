@@ -6,28 +6,19 @@
 
 namespace SomeWork\Bitrix\Console\Brindge\Symfony;
 
-use SomeWork\Bitrix\Console\Command\CacheClear;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class SomeWorkBitrixConsoleExtension extends Extension
 {
-    /**
-     * @return Definition[]
-     */
-    protected function getDefinitions()
-    {
-        return [
-            new Definition(CacheClear::class),
-        ];
-    }
-
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $container->addDefinitions($this->getDefinitions());
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__));
+        $loader->load('services.php');
     }
 }
