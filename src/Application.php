@@ -45,7 +45,7 @@ final class Application extends BaseApplication
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
@@ -55,6 +55,7 @@ final class Application extends BaseApplication
                 $input->setArgument(static::BITRIX_DOCUMENT_ROOT_ARG, $documentRoot);
             }
         }
+
         return parent::doRun($input, $output);
     }
 
@@ -70,7 +71,6 @@ final class Application extends BaseApplication
                 return $dir;
             }
         }
-        return null;
     }
 
     /**

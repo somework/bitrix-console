@@ -69,7 +69,7 @@ class CacheClear extends BitrixCommand
             $space_freed = 0;
             while ($file = $obCacheCleaner->GetNextFile()) {
                 if (\is_string($file)
-                    && !preg_match("/(\\.enabled|.config\\.php)\$/", $file)
+                    && !preg_match('/(\\.enabled|.config\\.php)$/', $file)
                 ) {
                     $file_size = filesize($file);
                     $_SESSION['CACHE_STAT']['scanned']++;
@@ -130,17 +130,17 @@ class CacheClear extends BitrixCommand
     protected function logResult()
     {
         if ($_SESSION['CACHE_STAT']) {
-            $this->log(LogLevel::INFO, 'Processed: ' . (int)$_SESSION['CACHE_STAT']['scanned']);
+            $this->log(LogLevel::INFO, 'Processed: ' . (int) $_SESSION['CACHE_STAT']['scanned']);
             $this->log(
                 LogLevel::INFO,
                 'Size of files processed: ' . CFile::FormatSize($_SESSION['CACHE_STAT']['space_total'])
             );
-            $this->log(LogLevel::INFO, 'Deleted: ' . (int)$_SESSION['CACHE_STAT']['deleted']);
+            $this->log(LogLevel::INFO, 'Deleted: ' . (int) $_SESSION['CACHE_STAT']['deleted']);
             $this->log(
                 LogLevel::INFO,
                 'Size of files deleted: ' . CFile::FormatSize($_SESSION['CACHE_STAT']['space_freed'])
             );
-            $this->log(LogLevel::INFO, 'Deletion errors: ' . (int)$_SESSION['CACHE_STAT']['errors']);
+            $this->log(LogLevel::INFO, 'Deletion errors: ' . (int) $_SESSION['CACHE_STAT']['errors']);
         } else {
             $this->log(LogLevel::INFO, 'The cache files has been deleted');
         }

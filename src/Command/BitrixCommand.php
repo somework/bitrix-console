@@ -69,8 +69,10 @@ abstract class BitrixCommand extends Command implements LoggerAwareInterface
         if ($documentRoot && file_exists($documentRoot . '/bitrix/modules/main/include.php')) {
             $_SERVER['DOCUMENT_ROOT'] = $documentRoot;
             require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include.php';
+
             return;
         }
+
         throw new \RuntimeException('No such document root was found');
     }
 
