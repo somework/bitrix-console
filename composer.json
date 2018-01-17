@@ -1,0 +1,31 @@
+{
+  "name": "somework/bitrix-console",
+  "description": "Multiple console bitrix commands",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Igor Pinchuk",
+      "email": "pinchuk@adv.ru"
+    }
+  ],
+  "keywords": [
+    "bitrix",
+    "console",
+    "Битрикс",
+    "битрикс"
+  ],
+  "autoload": {
+    "psr-4": {
+      "SomeWork\\Bitrix\\Console\\": "src"
+    }
+  },
+  "require": {
+    "psr/log": "^1.0",
+    "symfony/console": "^4.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "@stable"
+  },
+  "bin": ["bin/bitrix-console"]
+}

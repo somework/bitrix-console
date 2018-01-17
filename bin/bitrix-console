@@ -1,0 +1,31 @@
+#!/usr/bin/env php
+<?php
+
+if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50600 || PHP_VERSION_ID >= 70300) {
+    fwrite(STDERR, "PHP needs to be a minimum version of PHP 5.6.0 and maximum version of PHP 7.2.*.\n");
+
+    if (getenv('PHP_CS_FIXER_IGNORE_ENV')) {
+        fwrite(STDERR, "Ignoring environment requirements because `PHP_CS_FIXER_IGNORE_ENV` is set. Execution may be unstable.\n");
+    } else {
+        exit(1);
+    }
+}
+
+set_error_handler(function ($severity, $message, $file, $line) {
+    if ($severity & error_reporting()) {
+        throw new ErrorException($message, 0, $severity, $file, $line);
+    }
+});
+
+if (file_exists($a = __DIR__.'/../../autoload.php')) {
+    require_once $a;
+} else {
+    require_once dirname(__DIR__).'/vendor/autoload.php';
+}
+
+use SomeWork\Bitrix\Console\Application;
+
+$application = new Application();
+$application->run();
+
+__HALT_COMPILER();
