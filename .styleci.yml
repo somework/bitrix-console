@@ -1,0 +1,28 @@
+preset: recommended
+
+risky: true
+
+enabled:
+  - linebreak_after_opening_tag
+  - no_php4_constructor
+  - no_useless_else
+  - php_unit_construct
+  - pow_to_exponentiation
+  - random_api_migration
+  - phpdoc_types_order
+  - no_null_property_initialization
+  - no_unneeded_final_method
+  - no_unneeded_curly_braces
+  - no_superfluous_elseif
+  - concat_with_spaces
+  - align_comments
+
+disabled:
+  - concat_without_spaces
+  - align_phpdoc
+
+finder:
+  name:
+    - "*.php"
+  path:
+    - "src"
