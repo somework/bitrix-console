@@ -55,7 +55,7 @@ abstract class BitrixCommand extends Command implements LoggerAwareInterface
         }
 
         $documentRoot = $input->getOption(Application::BITRIX_DOCUMENT_ROOT_ARG);
-        $this->log(LogLevel::INFO, 'Bitrix Document Root: ' . $documentRoot);
+        $this->log(LogLevel::INFO, 'Bitrix Document Root: '.$documentRoot);
         $this->executeInternal($input, $output);
     }
 
@@ -66,11 +66,13 @@ abstract class BitrixCommand extends Command implements LoggerAwareInterface
      */
     protected function defineServerDocumentRoot($documentRoot)
     {
-        if ($documentRoot && file_exists($documentRoot . '/bitrix/modules/main/include.php')) {
+        if ($documentRoot && file_exists($documentRoot.'/bitrix/modules/main/include.php')) {
             $_SERVER['DOCUMENT_ROOT'] = $documentRoot;
-            require $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include.php';
+            require $_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include.php';
+
             return;
         }
+
         throw new \RuntimeException('No such document root was found');
     }
 

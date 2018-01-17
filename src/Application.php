@@ -37,15 +37,15 @@ final class Application extends BaseApplication
 
         $commit = '@git-commit@';
 
-        if ('@' . 'git-commit@' !== $commit) {
-            $version .= ' (' . substr($commit, 0, 7) . ')';
+        if ('@'.'git-commit@' !== $commit) {
+            $version .= ' ('.substr($commit, 0, 7).')';
         }
 
         return $version;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
@@ -55,6 +55,7 @@ final class Application extends BaseApplication
                 $input->setArgument(static::BITRIX_DOCUMENT_ROOT_ARG, $documentRoot);
             }
         }
+
         return parent::doRun($input, $output);
     }
 
@@ -66,11 +67,10 @@ final class Application extends BaseApplication
             dirname(__DIR__),
         ];
         foreach ($defaultDirs as $dir) {
-            if (file_exists($dir) . '/bitrix/modules/main/include.php') {
+            if (file_exists($dir).'/bitrix/modules/main/include.php') {
                 return $dir;
             }
         }
-        return null;
     }
 
     /**
