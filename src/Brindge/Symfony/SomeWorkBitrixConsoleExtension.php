@@ -9,18 +9,10 @@ namespace SomeWork\Bitrix\Console\Brindge\Symfony;
 use SomeWork\Bitrix\Console\Command\CacheClear;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
-class SomeWorkBitrixConsoleExtension extends ConfigurableExtension
+class SomeWorkBitrixConsoleExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
-    {
-        $container->addDefinitions($this->getDefinitions());
-    }
-
     /**
      * @return Definition[]
      */
@@ -29,5 +21,13 @@ class SomeWorkBitrixConsoleExtension extends ConfigurableExtension
         return [
             new Definition(CacheClear::class),
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $container->addDefinitions($this->getDefinitions());
     }
 }
