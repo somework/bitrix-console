@@ -10,13 +10,10 @@ use SomeWork\Bitrix\Console\Command\CacheClear;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\HelpCommand;
 use Symfony\Component\Console\Command\ListCommand;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 final class Application extends BaseApplication
 {
     const VERSION = '1.0.0';
-    const BITRIX_DOCUMENT_ROOT_ARG = 'document_root';
 
     public function __construct()
     {
@@ -42,35 +39,6 @@ final class Application extends BaseApplication
         }
 
         return $version;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function doRun(InputInterface $input, OutputInterface $output)
-    {
-        if ($input->hasArgument(static::BITRIX_DOCUMENT_ROOT_ARG)) {
-            $documentRoot = $input->getArgument(static::BITRIX_DOCUMENT_ROOT_ARG) ?: $this->getDefaultDocumentRoot();
-            if ($documentRoot) {
-                $input->setArgument(static::BITRIX_DOCUMENT_ROOT_ARG, $documentRoot);
-            }
-        }
-
-        return parent::doRun($input, $output);
-    }
-
-    protected function getDefaultDocumentRoot()
-    {
-        $defaultDirs = [
-            getcwd(),
-            dirname(__DIR__, 2),
-            dirname(__DIR__),
-        ];
-        foreach ($defaultDirs as $dir) {
-            if (file_exists($dir) . '/bitrix/modules/main/include.php') {
-                return $dir;
-            }
-        }
     }
 
     /**

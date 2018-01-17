@@ -17,10 +17,10 @@ set_error_handler(function ($severity, $message, $file, $line) {
     }
 });
 
-if (file_exists($a = __DIR__.'/../../autoload.php')) {
+if (file_exists($a = dirname(__DIR__, 3) . '/autoload.php')) {
     require_once $a;
 } else {
-    require_once dirname(__DIR__).'/vendor/autoload.php';
+    require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 }
 
 use SomeWork\Bitrix\Console\Application;
